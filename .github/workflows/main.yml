@@ -15,9 +15,10 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install wget
+          sudo apt-get install unzip
       - name: checkout_repo
         uses: actions/checkout@v4
-      - name: download_fonts
+      - name: download
         run: |
           mkdir fonts
           cd fonts
@@ -27,13 +28,14 @@ jobs:
           wget https://raw.githubusercontent.com/adobe-fonts/source-han-serif/release/OTF/SimplifiedChinese/SourceHanSerifSC-Bold.otf
           wget https://raw.githubusercontent.com/adobe-fonts/source-han-serif/release/OTF/SimplifiedChinese/SourceHanSerifSC-Regular.otf
           cd ..
+          wget https://mirrors.ctan.org/fonts/boondox.zip
+          unzip boondox.zip
       - name: compile
         uses: xu-cheng/texlive-action@v2
         with:
           scheme: full
           run: |
             tlmgr update --self
-            tlmgr install boondox
-            ls /opt/texlive/texdir/texmf-dist/tex/latex
-            export TEXINPUTS=/opt/texlive/texdir/texmf-dist/tex/latex/boondox/tex:$TEXINPUTS
+            ls boondox
+            export TEXINPUTS=./boondox/tex:$TEXINPUTS
             ./cp.sh
