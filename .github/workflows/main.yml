@@ -34,4 +34,6 @@ jobs:
           run: |
             tlmgr update --self
             tlmgr install boondox
+            ls /opt/texlive/texdir/texmf-dist/tex/
+            export TEXINPUTS=/opt/texlive/texdir/texmf-dist/tex/boondox/tex:$TEXINPUTS
             ./cp.sh
