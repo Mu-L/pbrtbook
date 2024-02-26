@@ -32,5 +32,6 @@ jobs:
         with:
           scheme: full
           run: |
+            tlmgr update --self
             tlmgr install boondox
             ./cp.sh
