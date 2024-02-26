@@ -18,7 +18,7 @@ jobs:
           sudo apt-get install unzip
       - name: checkout_repo
         uses: actions/checkout@v4
-      - name: download
+      - name: download_fonts
         run: |
           mkdir fonts
           cd fonts
@@ -36,6 +36,6 @@ jobs:
           scheme: full
           run: |
             tlmgr update --self
-            ls boondox
+            ls ./boondox
             export TEXINPUTS=./boondox/tex:$TEXINPUTS
             ./cp.sh
