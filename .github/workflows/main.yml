@@ -8,7 +8,7 @@ on:
       - main
       - develop
 jobs:
-  build_latex:
+  build_pdf:
     runs-on: ubuntu-latest
     steps:
       - name: set_up_env
@@ -18,7 +18,7 @@ jobs:
           sudo apt-get install unzip
       - name: checkout_repo
         uses: actions/checkout@v4
-      - name: download_fonts
+      - name: download_lib
         run: |
           mkdir fonts
           cd fonts
@@ -39,3 +39,8 @@ jobs:
             ls ./boondox
             export TEXINPUTS=./boondox/tex:$TEXINPUTS
             ./cp.sh
+      - name: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: upload_pdf
+          path: main.pdf
